@@ -1,26 +1,23 @@
 package com.gearsim;
 
+import com.gearsim.util.Vector;
+
 import java.awt.*;
 
 public class Shape {
+    private Polygon poly;
     private int points;
     private int radius;
-    private int[] xPoints;
-    private int[] yPoints;
-    private int x;
-    private int y;
+    private Vector position;
     private int angleOfRotation;
 
-    public Shape(int points, int x, int y, int radius) {
+    public Shape(int points, double x, double y, int radius) {
         if (points < 3) {
             return;
         } else {
             this.points = points;
             this.radius = radius;
-            this.xPoints = new int[this.points];
-            this.yPoints = new int[this.points];
-            this.x = x;
-            this.y = y;
+            this.position = new Vector(x, y);
         }
         construct();
     }
@@ -29,31 +26,29 @@ public class Shape {
         int angleDifference = 360 / this.points;
         int currentAngle = 0;
         for (int i = 0; i < this.points; i++) {
-            double currentX = this.x;
-            double currentY = this.y;
-            currentX = this.radius * Math.cos(Math.toRadians(currentAngle + angleOfRotation)) + this.x;
-            currentY = this.radius * Math.sin(Math.toRadians(currentAngle + angleOfRotation)) + this.y;
-            this.xPoints[i] = (int) currentX;
-            this.yPoints[i] = (int) currentY;
+            Vector currentPosition = new Vector(0, 0);
+            currentPosition.setX(this.radius * Math.cos(Math.toRadians(currentAngle + angleOfRotation)) + this.position.getX());
+            currentPosition.setY(this.radius * Math.sin(Math.toRadians(currentAngle + angleOfRotation)) + this.position.getX());
+            this.poly.addPoint((int) currentPosition.getX(), (int) currentPosition.getY());
             currentAngle += angleDifference;
         }
     }
 
     public void display(Graphics g) {
-        g.fillPolygon(this.xPoints, this.yPoints, this.points);
+        g.fillPolygon(this.poly);
     }
 
-    public int getX() {
-        return this.x;
+    public double getX() {
+        return this.position.getX();
     }
 
-    public int getY() {
-        return this.y;
+    public double getY() {
+        return this.position.getY();
     }
 
     public void setPosition(int x, int y) {
-        this.x = x;
-        this.y = y;
+        this.position.setX(x);
+        this.position.setY(y);
         construct();
     }
 
@@ -63,8 +58,6 @@ public class Shape {
 
     public void setPoints(int points) {
         this.points = points;
-        this.xPoints = new int[this.points];
-        this.yPoints = new int[this.points];
         construct();
     }
 

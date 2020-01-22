@@ -1,4 +1,4 @@
-package com.gearsim;
+package com.gearsim.util;
 
 public class Vector {
     private double x;
