@@ -8,7 +8,7 @@ public class Main {
     private static int height = 600;
 
     public static void main(String[] args) {
-        JFrame mainWindow = new JFrame("OK");
+        JFrame mainWindow = new JFrame("Simulator");
         Screen screen = new Screen(Color.black);
         mainWindow.setSize(500, 500);
         mainWindow.add(screen);

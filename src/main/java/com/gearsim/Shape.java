@@ -2,7 +2,7 @@ package com.gearsim;
 
 import java.awt.*;
 
-public class Circle {
+public class Shape {
     private int points;
     private int radius;
     private int[] xPoints;
@@ -11,7 +11,7 @@ public class Circle {
     private int y;
     private int angleOfRotation;
 
-    public Circle(int points, int x, int y, int radius) {
+    public Shape(int points, int x, int y, int radius) {
         if (points < 3) {
             return;
         } else {

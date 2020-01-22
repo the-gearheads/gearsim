@@ -6,23 +6,23 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class Screen extends JPanel implements MouseListener {
-    public Circle circle;
+    public Shape shape;
 
     public Screen(Color background) {
         this.addMouseListener(this);
         this.setBackground(background);
-        this.circle = new Circle(45, 200, 200, 100);
+        this.shape = new Shape(45, 200, 200, 100);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        circle.display(g);
+        shape.display(g);
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        circle.setPoints(circle.getPoints() + 1);
+        shape.setPoints(shape.getPoints() + 1);
         repaint();
     }
 
