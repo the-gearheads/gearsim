@@ -7,12 +7,6 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
-task myRun(type: JavaExec) {
-    classpath sourceSets.main.runtimeClasspath
-    main = "com.bla.MainRunner"
-    args "arg1", "arg2"
-}
-
 repositories {
     mavenCentral()
 }
