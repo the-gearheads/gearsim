@@ -15,6 +15,7 @@ public class Shape {
         if (points < 3) {
             return;
         } else {
+            this.poly = new Polygon();
             this.points = points;
             this.radius = radius;
             this.position = new Vector(x, y);
@@ -26,10 +27,10 @@ public class Shape {
         int angleDifference = 360 / this.points;
         int currentAngle = 0;
         for (int i = 0; i < this.points; i++) {
-            Vector currentPosition = new Vector(0, 0);
-            currentPosition.setX(this.radius * Math.cos(Math.toRadians(currentAngle + angleOfRotation)) + this.position.getX());
-            currentPosition.setY(this.radius * Math.sin(Math.toRadians(currentAngle + angleOfRotation)) + this.position.getX());
-            this.poly.addPoint((int) currentPosition.getX(), (int) currentPosition.getY());
+            Vector currentPosition = new Vector(this.position.X(), this.position.Y());
+            currentPosition.setX(this.radius * Math.cos(Math.toRadians(currentAngle + angleOfRotation)) + this.position.X());
+            currentPosition.setY(this.radius * Math.sin(Math.toRadians(currentAngle + angleOfRotation)) + this.position.X());
+            this.poly.addPoint((int) currentPosition.X(), (int) currentPosition.Y());
             currentAngle += angleDifference;
         }
     }
@@ -39,14 +40,14 @@ public class Shape {
     }
 
     public double getX() {
-        return this.position.getX();
+        return this.position.X();
     }
 
     public double getY() {
-        return this.position.getY();
+        return this.position.Y();
     }
 
-    public void setPosition(int x, int y) {
+    public void setPosition(double x, double y) {
         this.position.setX(x);
         this.position.setY(y);
         construct();

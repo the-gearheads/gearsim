@@ -10,38 +10,38 @@ public class Vector {
     }
 
     public static Vector add(Vector a, Vector b) {
-        return new Vector(a.getX() + b.getX(), a.getY() + b.getY());
+        return new Vector(a.X() + b.X(), a.Y() + b.Y());
     }
 
     public static Vector subtract(Vector a, Vector b) {
-        return new Vector(a.getX() - b.getX(), a.getY() - b.getY());
+        return new Vector(a.X() - b.X(), a.Y() - b.Y());
     }
 
     public static Vector multiply(Vector a, Vector b) {
-        return new Vector(a.getX() * b.getX(), a.getY() * b.getY());
+        return new Vector(a.X() * b.X(), a.Y() * b.Y());
     }
 
     public static Vector divide(Vector a, Vector b) {
-        return new Vector(a.getX() / b.getX(), a.getY() / b.getY());
+        return new Vector(a.X() / b.X(), a.Y() / b.Y());
     }
 
     public static Vector add(Vector a, double b) {
-        return new Vector(a.getX() + b, a.getY() + b);
+        return new Vector(a.X() + b, a.Y() + b);
     }
 
     public static Vector subtract(Vector a, double b) {
-        return new Vector(a.getX() - b, a.getY() - b);
+        return new Vector(a.X() - b, a.Y() - b);
     }
 
     public static Vector multiply(Vector a, double b) {
-        return new Vector(a.getX() * b, a.getY() * b);
+        return new Vector(a.X() * b, a.Y() * b);
     }
 
     public static Vector divide(Vector a, double b) {
-        return new Vector(a.getX() / b, a.getY() / b);
+        return new Vector(a.X() / b, a.Y() / b);
     }
 
-    public double getX() {
+    public double X() {
         return x;
     }
 
@@ -49,7 +49,7 @@ public class Vector {
         this.x = x;
     }
 
-    public double getY() {
+    public double Y() {
         return y;
     }
 

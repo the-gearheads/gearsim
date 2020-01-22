@@ -11,7 +11,7 @@ public class Screen extends JPanel implements MouseListener {
     public Screen(Color background) {
         this.addMouseListener(this);
         this.setBackground(background);
-        this.shape = new Shape(45, 200, 200, 100);
+        this.shape = new Shape(4, 200, 200, 100);
     }
 
     @Override
@@ -22,7 +22,6 @@ public class Screen extends JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        shape.setPoints(shape.getPoints() + 1);
         repaint();
     }
 

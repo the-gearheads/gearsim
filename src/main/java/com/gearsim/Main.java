@@ -14,5 +14,6 @@ public class Main {
         mainWindow.add(screen);
         mainWindow.setVisible(true);
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        new Thread(new Simulator()).start();
     }
 }

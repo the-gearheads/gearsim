@@ -15,6 +15,10 @@ public class Rigibody {
         this.shape = shape;
     }
 
+    private void update() {
+        this.velocity.setX(this.velocity.X() + (this.acceleration.X()));
+    }
+
     public void applyForce(Vector force) {
     }
 }
