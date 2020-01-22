@@ -13,5 +13,6 @@ public class Main {
         mainWindow.setSize(500, 500);
         mainWindow.add(screen);
         mainWindow.setVisible(true);
+        mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

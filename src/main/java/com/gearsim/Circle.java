@@ -63,6 +63,8 @@ public class Circle {
 
     public void setPoints(int points) {
         this.points = points;
+        this.xPoints = new int[this.points];
+        this.yPoints = new int[this.points];
         construct();
     }
 

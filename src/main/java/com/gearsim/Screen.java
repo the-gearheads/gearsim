@@ -11,7 +11,7 @@ public class Screen extends JPanel implements MouseListener {
     public Screen(Color background) {
         this.addMouseListener(this);
         this.setBackground(background);
-        this.circle = new Circle(12, 200, 200, 10);
+        this.circle = new Circle(45, 200, 200, 100);
     }
 
     @Override
@@ -22,8 +22,7 @@ public class Screen extends JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        circle.setAngleOfRotation(circle.getAngleOfRotation() + 4);
-        circle.setPosition(circle.getX() + 10, circle.getY());
+        circle.setPoints(circle.getPoints() + 1);
         repaint();
     }
 
