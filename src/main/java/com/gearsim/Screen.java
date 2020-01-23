@@ -15,6 +15,10 @@ public class Screen extends JPanel implements MouseListener {
         this.shapes = new ArrayList<>();
     }
 
+    public void addShape(Shape shape) {
+        this.shapes.add(shape);
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

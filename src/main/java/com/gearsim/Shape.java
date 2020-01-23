@@ -1,6 +1,7 @@
 package com.gearsim;
 
 import com.gearsim.util.Vector;
+import com.sun.org.apache.xerces.internal.impl.xs.models.XSCMRepeatingLeaf;
 
 import java.awt.*;
 
@@ -30,7 +31,7 @@ public class Shape {
         for (int i = 0; i < this.points; i++) {
             Vector currentPosition = new Vector(this.position.X(), this.position.Y());
             currentPosition.setX(this.radius * Math.cos(Math.toRadians(currentAngle + angleOfRotation)) + this.position.X());
-            currentPosition.setY(this.radius * Math.sin(Math.toRadians(currentAngle + angleOfRotation)) + this.position.X());
+            currentPosition.setY(this.radius * Math.sin(Math.toRadians(currentAngle + angleOfRotation)) + this.position.Y());
             this.poly.addPoint((int) currentPosition.X(), (int) currentPosition.Y());
             currentAngle += angleDifference;
         }
@@ -55,6 +56,12 @@ public class Shape {
     public void setPosition(double x, double y) {
         this.position.setX(x);
         this.position.setY(y);
+        construct();
+    }
+
+    public void setPosition(Vector position) {
+        this.position.setX(position.X());
+        this.position.setY(position.Y());
         construct();
     }
 
