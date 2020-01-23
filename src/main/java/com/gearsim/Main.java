@@ -8,12 +8,15 @@ public class Main {
     private static int height = 600;
 
     public static void main(String[] args) {
-        JFrame mainWindow = new JFrame("Simulator");
-        Screen screen = new Screen(Color.black);
-        mainWindow.setSize(500, 500);
-        mainWindow.add(screen);
+        JFrame mainWindow = new JFrame("Gearsim");
+        mainWindow.setSize(800, 600);
         mainWindow.setVisible(true);
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        new Thread(new Simulator()).start();
+
+        Screen screen = new Screen(Color.black);
+        mainWindow.add(screen);
+
+        Simulator simulator = new Simulator(screen);
+        simulator.start();
     }
 }

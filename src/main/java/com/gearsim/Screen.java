@@ -4,25 +4,28 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 public class Screen extends JPanel implements MouseListener {
-    public Shape shape;
+    private ArrayList<Shape> shapes;
 
     public Screen(Color background) {
         this.addMouseListener(this);
         this.setBackground(background);
-        this.shape = new Shape(4, 200, 200, 100);
+        this.shapes = new ArrayList<>();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        shape.display(g);
+        for (Shape shape : shapes) {
+            shape.display(g);
+        }
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        repaint();
+
     }
 
     @Override

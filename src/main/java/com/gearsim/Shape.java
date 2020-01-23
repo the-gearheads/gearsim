@@ -24,6 +24,7 @@ public class Shape {
     }
 
     private void construct() {
+        clearPolygon();
         int angleDifference = 360 / this.points;
         int currentAngle = 0;
         for (int i = 0; i < this.points; i++) {
@@ -33,6 +34,10 @@ public class Shape {
             this.poly.addPoint((int) currentPosition.X(), (int) currentPosition.Y());
             currentAngle += angleDifference;
         }
+    }
+
+    private void clearPolygon() {
+        this.poly.reset();
     }
 
     public void display(Graphics g) {
