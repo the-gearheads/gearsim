@@ -1,4 +1,6 @@
-package com.program;
+package com.program.shapes;
+
+import com.program.math.Vector3f;
 
 public class Vertex {
     private Vector3f position;

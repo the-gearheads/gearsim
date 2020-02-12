@@ -1,6 +1,10 @@
-package com.program;
+package com.program.engine;
 
-import com.program.Window;
+import com.program.engine.Renderer;
+import com.program.engine.Window;
+import com.program.math.Vector3f;
+import com.program.shapes.Mesh2D;
+import com.program.shapes.Vertex;
 
 public class Engine implements Runnable{
     private final Thread mainThread = new Thread(this, "MAIN_THREAD");

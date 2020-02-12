@@ -1,4 +1,4 @@
-package com.program;
+package com.program.math;
 
 public class Vector3f {
     float x, y, z;

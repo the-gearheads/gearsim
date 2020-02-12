@@ -1,4 +1,4 @@
-package com.program;
+package com.program.engine;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWVidMode;

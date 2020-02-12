@@ -1,10 +1,8 @@
-package com.program;
+package com.program.shapes;
 
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.MemoryUtil;
 
-import java.lang.management.MemoryManagerMXBean;
-import java.lang.reflect.Member;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
