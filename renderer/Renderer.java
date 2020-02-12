@@ -1,4 +1,4 @@
-package com.program.engine;
+package com.program.renderer;
 
 import com.program.shapes.Mesh2D;
 import org.lwjgl.opengl.GL11;

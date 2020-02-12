@@ -1,7 +1,6 @@
 package com.program.engine;
 
-import com.program.engine.Renderer;
-import com.program.engine.Window;
+import com.program.renderer.Renderer;
 import com.program.math.Vector3f;
 import com.program.shapes.Mesh2D;
 import com.program.shapes.Vertex;
