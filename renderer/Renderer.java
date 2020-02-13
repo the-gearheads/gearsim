@@ -11,8 +11,8 @@ public class Renderer {
 
     public void initShaders() throws Exception {
         shader = new Shader();
-        shader.createVertexShader(Shader.loadShaderFile("./vertex.vs"));
-        shader.createFragmentShader(Shader.loadShaderFile("./fragment.fs"));
+        shader.createVertexShader(Shader.loadShaderFile("/home/richards/FinalProject/src/com/program/shader/vertex.vs"));
+        shader.createFragmentShader(Shader.loadShaderFile("/home/richards/FinalProject/src/com/program/shader/fragment.fs"));
         shader.linkProgram();
     }
 
@@ -20,10 +20,12 @@ public class Renderer {
         shader.bindProgram();
         GL30.glBindVertexArray(mesh.getVAO());
         GL30.glEnableVertexAttribArray(0);
+        GL30.glEnableVertexAttribArray(1);
         GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, mesh.getIBO());
         GL11.glDrawElements(GL11.GL_TRIANGLES, mesh.getIndices().length, GL11.GL_UNSIGNED_INT, 0);
         GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
         GL30.glDisableVertexAttribArray(0);
+        GL30.glDisableVertexAttribArray(1);
         GL30.glBindVertexArray(0);
         shader.unbindProgram();
     }

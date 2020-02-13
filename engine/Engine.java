@@ -2,6 +2,7 @@ package com.program.engine;
 
 import com.program.renderer.Renderer;
 import com.program.math.Vector3f;
+import com.program.shapes.Color;
 import com.program.shapes.Mesh2D;
 import com.program.shapes.Vertex;
 
@@ -45,8 +46,13 @@ public class Engine implements Runnable{
                 new Vertex(new Vector3f(0.5f, -0.5f, 0.0f)),
                 new Vertex(new Vector3f(-0.5f, -0.5f, 0.0f))
         }, new int[] {
-            0, 1, 2,
-            0, 3, 2
+                0, 1, 2,
+                0, 3, 2
+        }, new Color[] {
+                new Color(0.0f, 0.0f, 1.0f, 1.0f),
+                new Color(1.0f, 0.0f, 0.0f, 1.0f),
+                new Color(0.0f, 1.0f, 0.0f, 1.0f),
+                new Color(0.0f, 1.0f, 1.0f, 1.0f)
         });
     }
 
