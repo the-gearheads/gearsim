@@ -13,7 +13,12 @@ public class Engine implements Runnable{
 
     @Override
     public void run() {
-        init();
+        try {
+            init();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         while (!window.isClosing()) {
             update();
             render();
@@ -23,13 +28,16 @@ public class Engine implements Runnable{
                 e.printStackTrace();
             }
         }
+
+        end();
         window.close();
         stop();
     }
 
-    public void init() {
+    public void init() throws Exception {
         window.intialize();
         window.setBackgroundClearColor(1.0f, 1.0f, 0.0f, 1.0f);
+        renderer.initShaders();
 
         mesh = new Mesh2D(new Vertex[] {
                 new Vertex(new Vector3f(-0.5f, 0.5f, 0.0f)),
@@ -47,12 +55,16 @@ public class Engine implements Runnable{
     }
 
     private void render() {
-        renderer.renderMesh2D(mesh);
+        renderer.renderMesh(mesh);
         window.swapBuffers();
     }
 
     public void start() {
         mainThread.start();
+    }
+
+    public void end() {
+
     }
 
     public void stop() {
