@@ -1,15 +1,21 @@
 package com.program.shader;
 
+import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL20;
+import org.lwjgl.system.MemoryStack;
 
 import java.io.IOException;
+import java.nio.FloatBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Shader {
     private int program;
     private int vertexShader;
     private int fragmentShader;
+    private final Map<String, Integer> uniforms = new HashMap<>();
 
     public Shader() throws Exception{
         program = GL20.glCreateProgram();
@@ -69,6 +75,22 @@ public class Shader {
 
     public void createFragmentShader(String code) throws Exception {
         fragmentShader = createShader(code, GL20.GL_FRAGMENT_SHADER);
+    }
+
+    public void createUniform(String name) throws Exception {
+        int uniform = GL20.glGetUniformLocation(program, name);
+        if (uniform < 0) {
+            throw new Exception("Could not find specified uniform '" + name + "'.");
+        }
+        uniforms.put(name, uniform);
+    }
+
+    public void setUniform(String name, Matrix4f mat) {
+        try (MemoryStack stack = MemoryStack.stackPush()) {
+            FloatBuffer buffer = stack.mallocFloat(16);
+            mat.get(buffer);
+            GL20.glUniformMatrix4fv(uniforms.get(name), false, buffer);
+        }
     }
 
     public static String loadShaderFile(String path) {

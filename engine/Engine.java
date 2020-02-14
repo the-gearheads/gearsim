@@ -5,6 +5,7 @@ import com.program.math.Vector3f;
 import com.program.shapes.Color;
 import com.program.shapes.Mesh2D;
 import com.program.shapes.Vertex;
+import org.lwjgl.assimp.AIMatrix4x4;
 
 public class Engine implements Runnable{
     private final Thread mainThread = new Thread(this, "MAIN_THREAD");
@@ -39,15 +40,18 @@ public class Engine implements Runnable{
         window.intialize();
         window.setBackgroundClearColor(1.0f, 1.0f, 0.0f, 1.0f);
         renderer.initShaders();
+        renderer.initProjection(this.window);
 
         mesh = new Mesh2D(new Vertex[] {
-                new Vertex(new Vector3f(-0.5f, 0.5f, 0.0f)),
-                new Vertex(new Vector3f(0.5f, 0.5f, 0.0f)),
-                new Vertex(new Vector3f(0.5f, -0.5f, 0.0f)),
-                new Vertex(new Vector3f(-0.5f, -0.5f, 0.0f))
+                new Vertex(new Vector3f(-0.5f, 0.5f, -1.05f)),
+                new Vertex(new Vector3f(0.5f, 0.5f, -1.05f)),
+                new Vertex(new Vector3f(0.5f, -0.5f, -1.05f)),
+                new Vertex(new Vector3f(-0.5f, -0.5f, -1.05f)),
+                //new Vertex(new Vector3f(-0.6f, -0.7f, 0.0f))
         }, new int[] {
                 0, 1, 2,
-                0, 3, 2
+                0, 3, 2,
+                //0, 4, 5
         }, new Color[] {
                 new Color(0.0f, 0.0f, 1.0f, 1.0f),
                 new Color(1.0f, 0.0f, 0.0f, 1.0f),

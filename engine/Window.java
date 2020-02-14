@@ -2,6 +2,7 @@ package com.program.engine;
 
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWVidMode;
+import org.lwjgl.glfw.GLFWWindowCloseCallback;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 
@@ -56,6 +57,14 @@ public class Window {
         this.bgRGBA[1] = g;
         this.bgRGBA[2] = b;
         this.bgRGBA[3] = a;
+    }
+
+    public int getWidth() {
+        return this.width;
+    }
+
+    public int getHeight() {
+        return this.height;
     }
 
     public boolean isClosing() {
