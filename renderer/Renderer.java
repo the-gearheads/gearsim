@@ -28,28 +28,39 @@ public class Renderer {
         shader.linkProgram();
     }
 
-    public void renderMesh(Mesh2D mesh) {
+    public void render(Mesh2D mesh) {
         shader.bindProgram();
         renderProjection();
+        bind(mesh);
+    }
+
+    private void bind(Mesh2D mesh) {
         GL30.glBindVertexArray(mesh.getVAO());
+
         GL30.glEnableVertexAttribArray(0);
         GL30.glEnableVertexAttribArray(1);
+
         GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, mesh.getIBO());
         GL11.glDrawElements(GL11.GL_TRIANGLES, mesh.getIndices().length, GL11.GL_UNSIGNED_INT, 0);
+    }
+
+    private void unbind() {
         GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, 0);
+
         GL30.glDisableVertexAttribArray(0);
         GL30.glDisableVertexAttribArray(1);
+
         GL30.glBindVertexArray(0);
-        shader.unbindProgram();
     }
 
     public void renderProjection() {
         shader.setUniform("projMat", projection);
     }
 
-    public void wrapUpShaders() {
+    public void wrapUp() {
         if (shader != null) {
             shader.removeProgram();
         }
+        unbind();
     }
 }

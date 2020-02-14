@@ -65,7 +65,7 @@ public class Engine implements Runnable{
     }
 
     private void render() {
-        renderer.renderMesh(mesh);
+        renderer.render(mesh);
         window.swapBuffers();
     }
 
@@ -74,7 +74,7 @@ public class Engine implements Runnable{
     }
 
     public void end() {
-
+        renderer.wrapUp();
     }
 
     public void stop() {

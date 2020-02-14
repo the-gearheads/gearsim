@@ -12,6 +12,8 @@ public class Mesh2D {
     private Color[] colors;
     private int VAO, VBO, IBO, COLOR;
 
+    public Mesh2D() {}
+
     public Mesh2D(Vertex[] vertices, int[] indices, Color[] colors) {
         this.vertices = vertices;
         this.indices = indices;
@@ -77,6 +79,14 @@ public class Mesh2D {
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 
         return color;
+    }
+
+    protected void setVertices(Vertex[] verts) {
+        this.vertices = verts;
+    }
+
+    public void setIndices(int[] indices) {
+        this.indices = indices;
     }
 
     public Vertex[] getVertices() {
