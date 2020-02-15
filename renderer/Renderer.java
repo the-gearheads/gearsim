@@ -1,6 +1,7 @@
 package com.program.renderer;
 
 import com.program.engine.Window;
+import com.program.rigidbodies.RigidbodyRect;
 import com.program.shader.Shader;
 import com.program.shapes.Mesh2D;
 import org.joml.Matrix4f;
@@ -10,15 +11,33 @@ import org.lwjgl.opengl.GL30;
 
 public class Renderer {
     private Shader shader;
+
     private final float FOV = (float)Math.toRadians(60.0f);
     private final float Z_NEAR = 0.01f;
     private final float Z_FAR = 1000.f;
+
+    private final Transformations transformations;
     private Matrix4f projection;
+    private Matrix4f world;
+
+    public Renderer() {
+        transformations = new Transformations();
+    }
+
+    public void initUniforms() throws Exception {
+        shader.createUniform("projMat");
+        shader.createUniform("worldMat");
+    }
 
     public void initProjection(Window window) throws Exception {
-        float aspectRatio = (float) window.getWidth() / window.getHeight();
-        projection = new Matrix4f().perspective(FOV, aspectRatio, Z_NEAR, Z_FAR);
-        shader.createUniform("projMat");
+        projection = transformations.getProjMatrix(
+                this.FOV,
+                this.Z_NEAR,
+                this.Z_FAR,
+                window.getWidth(),
+                window.getHeight()
+        );
+        shader.setUniform("projMat", projection);
     }
 
     public void initShaders() throws Exception {
@@ -28,10 +47,17 @@ public class Renderer {
         shader.linkProgram();
     }
 
-    public void render(Mesh2D mesh) {
+    public void renderRidgidbody(RigidbodyRect rect) {
         shader.bindProgram();
-        renderProjection();
-        bind(mesh);
+        setProjection();
+
+        Matrix4f worldMatrix = transformations.getWorldMatrix(
+                rect.getPostition(),
+                rect.getRotation(),
+                rect.getScale()
+        );
+        shader.setUniform("worldMat", world);
+        bind(rect.getRect());
     }
 
     private void bind(Mesh2D mesh) {
@@ -53,8 +79,12 @@ public class Renderer {
         GL30.glBindVertexArray(0);
     }
 
-    public void renderProjection() {
+    private void setProjection() {
         shader.setUniform("projMat", projection);
+    }
+
+    private void setWorld() {
+        shader.setUniform("worldMat", world);
     }
 
     public void wrapUp() {

@@ -18,6 +18,9 @@ public class Mesh2D {
         this.vertices = vertices;
         this.indices = indices;
         this.colors = colors;
+    }
+
+    protected void constructBuffers() {
         VAO = generateVAO();
         VBO = generateVBO();
         IBO = generateIBO();
@@ -35,9 +38,9 @@ public class Mesh2D {
         FloatBuffer positionBuffer = MemoryUtil.memAllocFloat(vertices.length * 3);
         float[] positionData = new float[this.vertices.length * 3];
         for (int i = 0; i < this.vertices.length; i++) {
-            positionData[i * 3] = this.vertices[i].getPosition().x();
-            positionData[i * 3 + 1] = this.vertices[i].getPosition().y();
-            positionData[i * 3 + 2] = this.vertices[i].getPosition().z();
+            positionData[i * 3] = this.vertices[i].getPosition().x;
+            positionData[i * 3 + 1] = this.vertices[i].getPosition().y;
+            positionData[i * 3 + 2] = this.vertices[i].getPosition().z;
         }
         positionBuffer.put(positionData).flip();
 
@@ -85,10 +88,13 @@ public class Mesh2D {
         this.vertices = verts;
     }
 
-    public void setIndices(int[] indices) {
+    protected void setIndices(int[] indices) {
         this.indices = indices;
     }
 
+    protected void setColor(Color[] colors) {
+        this.colors = colors;
+    }
     public Vertex[] getVertices() {
         return this.vertices;
     }

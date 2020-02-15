@@ -79,8 +79,9 @@ public class Shader {
 
     public void createUniform(String name) throws Exception {
         int uniform = GL20.glGetUniformLocation(program, name);
+        System.out.println(uniform);
         if (uniform < 0) {
-            throw new Exception("Could not find specified uniform '" + name + "'.");
+            throw new Exception("Could not find specified uniform '" + name + "'");
         }
         uniforms.put(name, uniform);
     }
