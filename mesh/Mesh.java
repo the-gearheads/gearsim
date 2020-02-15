@@ -1,4 +1,4 @@
-package com.program.shapes;
+package com.program.mesh;
 
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.MemoryUtil;
@@ -6,15 +6,15 @@ import org.lwjgl.system.MemoryUtil;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
-public class Mesh2D {
+public class Mesh {
     private Vertex[] vertices;
-    private int[] indices;
+    private Tri[] indices;
     private Color[] colors;
     private int VAO, VBO, IBO, COLOR;
 
-    public Mesh2D() {}
+    public Mesh() {}
 
-    public Mesh2D(Vertex[] vertices, int[] indices, Color[] colors) {
+    public Mesh(Vertex[] vertices, Tri[] indices, Color[] colors) {
         this.vertices = vertices;
         this.indices = indices;
         this.colors = colors;
@@ -54,8 +54,15 @@ public class Mesh2D {
     }
 
     private int generateIBO() {
-        IntBuffer indicesBuffer = MemoryUtil.memAllocInt(this.indices.length);
-        indicesBuffer.put(this.indices).flip();
+        IntBuffer indicesBuffer = MemoryUtil.memAllocInt(this.indices.length * 3);
+        int[] indices = new int[this.indices.length * 3];
+        for (int i = 0; i < this.indices.length; i++) {
+            indices[i * 3] = this.indices[i].getA();
+            indices[i * 3 + 1] = this.indices[i].getB();
+            indices[i * 3 + 2] = this.indices[i].getC();
+        }
+        indicesBuffer.put(indices).flip();
+
         int ibo = GL15.glGenBuffers();
         GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, ibo);
         GL15.glBufferData(GL15.GL_ELEMENT_ARRAY_BUFFER, indicesBuffer, GL15.GL_STATIC_DRAW);
@@ -88,7 +95,7 @@ public class Mesh2D {
         this.vertices = verts;
     }
 
-    protected void setIndices(int[] indices) {
+    protected void setIndices(Tri[] indices) {
         this.indices = indices;
     }
 
@@ -99,7 +106,7 @@ public class Mesh2D {
         return this.vertices;
     }
 
-    public int[] getIndices() {
+    public Tri[] getIndices() {
         return this.indices;
     }
 

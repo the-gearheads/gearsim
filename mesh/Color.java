@@ -1,4 +1,4 @@
-package com.program.shapes;
+package com.program.mesh;
 
 public class Color {
     private float r, g, b, a;

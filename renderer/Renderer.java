@@ -1,9 +1,9 @@
 package com.program.renderer;
 
 import com.program.engine.Window;
-import com.program.rigidbodies.RigidbodyRect;
+import com.program.rigidbodies.RigidbodyCube;
 import com.program.shader.Shader;
-import com.program.shapes.Mesh2D;
+import com.program.mesh.Mesh;
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
@@ -47,27 +47,28 @@ public class Renderer {
         shader.linkProgram();
     }
 
-    public void renderRidgidbody(RigidbodyRect rect) {
+    public void renderRidgidbody(RigidbodyCube rect) {
         shader.bindProgram();
         setProjection();
-
-        Matrix4f worldMatrix = transformations.getWorldMatrix(
+        world = transformations.getWorldMatrix(
                 rect.getPostition(),
                 rect.getRotation(),
                 rect.getScale()
         );
-        shader.setUniform("worldMat", world);
-        bind(rect.getRect());
+        setWorld();
+        rect.getMesh().update();
+        bind(rect.getMesh());
+        shader.unbindProgram();
     }
 
-    private void bind(Mesh2D mesh) {
+    private void bind(Mesh mesh) {
         GL30.glBindVertexArray(mesh.getVAO());
 
         GL30.glEnableVertexAttribArray(0);
         GL30.glEnableVertexAttribArray(1);
 
         GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, mesh.getIBO());
-        GL11.glDrawElements(GL11.GL_TRIANGLES, mesh.getIndices().length, GL11.GL_UNSIGNED_INT, 0);
+        GL11.glDrawElements(GL11.GL_TRIANGLES, mesh.getIndices().length * 3, GL11.GL_UNSIGNED_INT, 0);
     }
 
     private void unbind() {

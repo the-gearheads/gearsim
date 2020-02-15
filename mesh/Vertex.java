@@ -1,4 +1,4 @@
-package com.program.shapes;
+package com.program.mesh;
 
 import org.joml.Vector3f;
 

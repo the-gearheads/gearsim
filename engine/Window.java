@@ -31,6 +31,7 @@ public class Window {
         GLFW.glfwSwapInterval(1);
         GLFW.glfwMakeContextCurrent(this.internalWindow);
         GL.createCapabilities();
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
     }
 
     public void update() {
@@ -49,7 +50,7 @@ public class Window {
                 this.bgRGBA[2],
                 this.bgRGBA[3]
         );
-        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
     }
 
     public void setBackgroundClearColor(float r, float g, float b, float a) {

@@ -22,9 +22,9 @@ public class Transformations {
 
     public Matrix4f getWorldMatrix(Vector3f offset, Vector3f rotate, float scale) {
         worldMat.identity().translate(offset).
-                rotateX((float)Math.toRadians(rotate.x())).
-                rotateY((float)Math.toRadians(rotate.y())).
-                rotateX((float)Math.toRadians(rotate.z())).
+                rotateX((float)Math.toRadians(rotate.x)).
+                rotateY((float)Math.toRadians(rotate.y)).
+                rotateZ((float)Math.toRadians(rotate.z)).
                 scale(scale);
         return worldMat;
     }

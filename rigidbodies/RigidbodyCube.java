@@ -1,23 +1,23 @@
 package com.program.rigidbodies;
 
-import com.program.shapes.Rect;
+import com.program.shapes.Cube;
 import org.joml.Vector3f;
 
-public class RigidbodyRect {
-    private final Rect rect;
+public class RigidbodyCube {
+    private final Cube cube;
     private final Vector3f postition;
     private final Vector3f rotation;
     private final float scale;
 
-    public RigidbodyRect(Rect rect) {
-        this.rect = rect;
+    public RigidbodyCube(Cube cube) {
+        this.cube = cube;
         this.postition = new Vector3f(0, 0, 0);
         this.rotation = new Vector3f(0, 0, 0);
         this.scale = 1;
     }
 
-    public RigidbodyRect(Rect rect, Vector3f postition, Vector3f rotation, float scale) {
-        this.rect = rect;
+    public RigidbodyCube(Cube rect, Vector3f postition, Vector3f rotation, float scale) {
+        this.cube = rect;
         this.postition = postition;
         this.rotation = rotation;
         this.scale = 1;
@@ -40,14 +40,14 @@ public class RigidbodyRect {
     }
 
     public Vector3f getRotation() {
-        return postition;
+        return rotation;
     }
 
     public float getScale() {
         return scale;
     }
 
-    public Rect getRect() {
-        return this.rect;
+    public Cube getMesh() {
+        return this.cube;
     }
 }
