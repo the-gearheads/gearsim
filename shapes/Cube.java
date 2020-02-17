@@ -41,14 +41,14 @@ public class Cube extends Mesh {
                 new Tri(7, 4, 5)
         };
         color = new Color[] {
-                new Color(1.0f, 0.0f, 0.0f, 1.0f),
-                new Color(0.0f, 1.0f, 0.0f, 1.0f),
-                new Color(1.0f, 1.0f, 0.0f, 1.0f),
-                new Color(0.0f, 0.0f, 1.0f, 1.0f),
-                new Color(0.0f, 1.0f, 1.0f, 1.0f),
-                new Color(1.0f, 1.0f, 1.0f, 1.0f),
-                new Color(0.0f, 0.0f, 0.0f, 1.0f),
-                new Color(0.0f, 1.0f, 0.0f, 1.0f)
+                new Color(0, 0, 0, 255),
+                new Color(255, 0, 0, 255),
+                new Color(0, 255, 0, 255),
+                new Color(255, 255, 0, 255),
+                new Color(0, 0, 255, 255),
+                new Color(255, 0, 255, 255),
+                new Color(0, 255, 255, 255),
+                new Color(255, 255, 255, 255)
         };
     }
 

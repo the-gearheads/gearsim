@@ -1,6 +1,9 @@
 package com.program.shader;
 
+import lighting.Sunlight;
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.system.MemoryStack;
 
@@ -86,12 +89,44 @@ public class Shader {
         uniforms.put(name, uniform);
     }
 
+    public void setUniform(String name, float val) {
+        GL20.glUniform1f(uniforms.get(name), val);
+    }
+
     public void setUniform(String name, Matrix4f mat) {
         try (MemoryStack stack = MemoryStack.stackPush()) {
             FloatBuffer buffer = stack.mallocFloat(16);
             mat.get(buffer);
             GL20.glUniformMatrix4fv(uniforms.get(name), false, buffer);
         }
+    }
+
+    public void setUniform(String name, Vector3f vec) {
+        try (MemoryStack stack = MemoryStack.stackPush()) {
+            FloatBuffer buffer = stack.mallocFloat(3);
+            vec.get(buffer);
+            GL20.glUniform3fv(uniforms.get(name), buffer);
+        }
+    }
+
+    public void setUniform(String name, Vector4f vec) {
+        try (MemoryStack stack = MemoryStack.stackPush()) {
+            FloatBuffer buffer = stack.mallocFloat(4);
+            vec.get(buffer);
+            GL20.glUniform4fv(uniforms.get(name), buffer);
+        }
+    }
+
+    public void createSunlightUniform(String name) throws Exception {
+        createUniform(name + ".color");
+        createUniform(name + ".direction");
+        createUniform(name + ".intensity");
+    }
+
+    public void setSunlightUniform(String name, Sunlight sunlight) {
+        setUniform(name + ".color", sunlight.getColor().toVector());
+        setUniform(name + ".direction", sunlight.getDirection());
+        setUniform(name + ".intensity", sunlight.getIntensity());
     }
 
     public static String loadShaderFile(String path) {

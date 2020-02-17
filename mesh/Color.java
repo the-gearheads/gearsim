@@ -1,9 +1,11 @@
 package com.program.mesh;
 
-public class Color {
-    private float r, g, b, a;
+import org.joml.Vector4f;
 
-    public Color(float r, float g, float b, float a) {
+public class Color {
+    private int r, g, b, a;
+
+    public Color(int r, int g, int b, int a) {
         this.r = r;
         this.g = g;
         this.b = b;
@@ -11,18 +13,22 @@ public class Color {
     }
 
     public float getR() {
-        return r;
+        return (float) r / 255;
     }
 
     public float getG() {
-        return g;
+        return (float) g / 255;
     }
 
     public float getB() {
-        return b;
+        return (float) b / 255;
     }
 
     public float getA() {
-        return a;
+        return (float) a / 255;
+    }
+
+    public Vector4f toVector() {
+        return new Vector4f(getR(), getG(), getB(), getA());
     }
 }

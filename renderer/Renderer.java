@@ -1,10 +1,14 @@
 package com.program.renderer;
 
 import com.program.engine.Window;
-import com.program.rigidbodies.RigidbodyCube;
+import com.program.mesh.Color;
+import com.program.rigidbodies.Rigidbody;
 import com.program.shader.Shader;
 import com.program.mesh.Mesh;
+import lighting.Sunlight;
 import org.joml.Matrix4f;
+import org.joml.Vector3f;
+import org.joml.Vector4f;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL30;
@@ -16,28 +20,17 @@ public class Renderer {
     private final float Z_NEAR = 0.01f;
     private final float Z_FAR = 1000.f;
 
+    private final Window window;
     private final Transformations transformations;
-    private Matrix4f projection;
-    private Matrix4f world;
 
-    public Renderer() {
-        transformations = new Transformations();
+    public Renderer(Window window) {
+        this.window = window;
+        this.transformations = new Transformations();
     }
 
     public void initUniforms() throws Exception {
         shader.createUniform("projMat");
-        shader.createUniform("worldMat");
-    }
-
-    public void initProjection(Window window) throws Exception {
-        projection = transformations.getProjMatrix(
-                this.FOV,
-                this.Z_NEAR,
-                this.Z_FAR,
-                window.getWidth(),
-                window.getHeight()
-        );
-        shader.setUniform("projMat", projection);
+        shader.createUniform("objMat");
     }
 
     public void initShaders() throws Exception {
@@ -47,17 +40,28 @@ public class Renderer {
         shader.linkProgram();
     }
 
-    public void renderRidgidbody(RigidbodyCube rect) {
+    public void render(Rigidbody[] rigidbodies, Camera camera) {
         shader.bindProgram();
-        setProjection();
-        world = transformations.getWorldMatrix(
-                rect.getPostition(),
-                rect.getRotation(),
-                rect.getScale()
+
+        Matrix4f projMatrix = transformations.getProjMatrix(
+                this.FOV,
+                this.Z_NEAR,
+                this.Z_FAR,
+                this.window.getWidth(),
+                this.window.getHeight()
         );
-        setWorld();
-        rect.getMesh().update();
-        bind(rect.getMesh());
+        shader.setUniform("projMat", projMatrix);
+
+        Matrix4f camMatrix = transformations.getCamMatrix(camera);
+
+        for (Rigidbody rigidbody : rigidbodies) {
+            Matrix4f objMatrix = transformations.getObjectMatrix(rigidbody, camMatrix);
+            shader.setUniform("objMat", objMatrix);
+
+            rigidbody.getMesh().update();
+            bind(rigidbody.getMesh());
+        }
+
         shader.unbindProgram();
     }
 
@@ -78,14 +82,6 @@ public class Renderer {
         GL30.glDisableVertexAttribArray(1);
 
         GL30.glBindVertexArray(0);
-    }
-
-    private void setProjection() {
-        shader.setUniform("projMat", projection);
-    }
-
-    private void setWorld() {
-        shader.setUniform("worldMat", world);
     }
 
     public void wrapUp() {
