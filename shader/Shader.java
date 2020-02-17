@@ -1,11 +1,12 @@
 package com.program.shader;
 
-import lighting.Sunlight;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.system.MemoryStack;
+
+import com.program.lighting.Sunlight;
 
 import java.io.IOException;
 import java.nio.FloatBuffer;

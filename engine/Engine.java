@@ -1,11 +1,9 @@
 package com.program.engine;
 
-import com.program.mesh.Color;
 import com.program.renderer.Camera;
 import com.program.renderer.Renderer;
 import com.program.rigidbodies.Rigidbody;
 import com.program.shapes.Cube;
-import lighting.Sunlight;
 import org.joml.Vector3f;
 import org.lwjgl.system.CallbackI;
 

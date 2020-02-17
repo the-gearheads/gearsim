@@ -5,7 +5,6 @@ import com.program.mesh.Color;
 import com.program.rigidbodies.Rigidbody;
 import com.program.shader.Shader;
 import com.program.mesh.Mesh;
-import lighting.Sunlight;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
